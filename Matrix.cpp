@@ -11,7 +11,11 @@ using namespace zich;
 namespace zich{
         
         // a contructor
-        Matrix::Matrix(vector<double> matrix, int row, int column){}
+        Matrix::Matrix(vector<double> matrix, int row, int column){
+                this->matrix = matrix;
+                this->row=row;
+                this->column= column;
+        }
 
         // a decontructor
         Matrix::~Matrix(){}

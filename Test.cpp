@@ -16,12 +16,14 @@ using namespace std;
 using namespace zich;
 
 
-TEST_CASE("bad-input-illlegal multi"){
+TEST_CASE("bad-input-illlegal multi And good input scalar multipication"){
     for(double i = 0 ; i < 50; i++){
         vector<double> mati = {i,0,0,0,i,0,0,i,0};
         vector<double> mati1 = {i,0,0,0,i,0,0,i,0,0,0,i,i,0,0};
         Matrix mat1(mati,3,3);
         Matrix mat2(mati1,4,4);
+        CHECK_NOTHROW(Matrix(mati,3,3));
+        CHECK_NOTHROW(Matrix(mati,3,3));
         CHECK_THROWS(mat2 + mat1);
         CHECK_THROWS(mat2 += mat1);
         CHECK_THROWS(mat2 + mat1);
@@ -46,17 +48,24 @@ TEST_CASE("Good input") {
         vector<double> mati1 = {i,0,0,0,i,0,0,i,0};
         Matrix mat1(mati,3,3);
         Matrix mat2(mati1,3,3);
+        CHECK_NOTHROW(Matrix(mati,3,3));
+        CHECK_NOTHROW(Matrix(mati,3,3));
         CHECK_NOTHROW(mat2 + mat1);
         CHECK_NOTHROW(mat2 += mat1);
         CHECK_NOTHROW(mat2 + mat1);
         CHECK_NOTHROW(mat2 += mat1);
         CHECK_NOTHROW(mat2 - mat1);
         CHECK_NOTHROW(mat2 -= mat1);
+        CHECK_NOTHROW(mat2 * mat1);
+        CHECK_NOTHROW(mat1 * i);
+        CHECK_NOTHROW(i * mat1);
+        CHECK_NOTHROW(mat2 *= i);
+        CHECK_NOTHROW(i *= mat2);
         ;
     }
 }
 
-TEST_CASE("good input") {
+TEST_CASE("good input-comeration operators") {
 	
    for(double i = 0 ; i< 50; i++){
         vector<double> mati = {i,0,0,0,i,0,0,0,i};
@@ -68,8 +77,25 @@ TEST_CASE("good input") {
         CHECK_FALSE(mat2*5 == 3*mat1); 
         CHECK((mat2 == 5*mat1) == true);
         CHECK_FALSE((mat2 == 5*mat1) == false); 
-   }
-    
+   }	
+}
 
+
+TEST_CASE("good input-comeration operators") {
 	
+   for(double i = 0 ; i< 50; i++){
+        vector<double> mati = {i,0,0,0,i,0,0,0,i};
+        vector<double> mati1 = {5*i,0,0,0,5*i,0,0,5*i,0};
+        Matrix mat1(mati,3,3);
+        Matrix mat2(mati1,3,3);
+        CHECK(mat2 > mat1); 
+        CHECK(mat2 < 15*mat1);
+        CHECK(mat2 >= mat1); 
+        CHECK(mat2 <= 15*mat1);
+        CHECK(mat2 != 15*mat1);
+        CHECK_FALSE(mat2 < mat1); 
+        CHECK_FALSE(mat2 > 15*mat1); 
+        CHECK_FALSE(mat2 <= mat1); 
+        CHECK_FALSE(mat2 >= 15*mat1); 
+   }	
 }
